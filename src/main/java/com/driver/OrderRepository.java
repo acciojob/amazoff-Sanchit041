@@ -18,8 +18,9 @@ public class OrderRepository {
         return "Success";
     }
 
-    public String addPartner(DeliveryPartner deliveryPartner) {
-        DBD.put(deliveryPartner.getId(), deliveryPartner);
+    public String addPartner(String  deliveryPartner) {
+        DeliveryPartner db = new DeliveryPartner(deliveryPartner);
+        DBD.put(deliveryPartner, db);
         return "Success";
     }
 
@@ -77,7 +78,7 @@ public class OrderRepository {
         return Pair_OD.get(partnerId).size();
     }
 
-    public List<Order> getOrdersByPartnerId(String partnerId) throws Exception {
+    public List<String> getOrdersByPartnerId(String partnerId) throws Exception {
         if (!Pair_OD.containsKey(partnerId)) {
             throw new Exception("partner is not present");
         }
@@ -86,14 +87,25 @@ public class OrderRepository {
         for (String orderId : OrderIdList) {
             orderList.add(DBO.get(orderId));
         }
-        return orderList;
+        List<String> ans = new ArrayList<>();
+        for(Order o : orderList)
+        {
+            ans.add(o.toString());
+        }
+        return ans;
     }
 
-    public List<Order> getAllOrders() throws Exception {
+    public List<String> getAllOrders() throws Exception {
         if (DBO.size() == 0) {
             throw new Exception("Their is no order present in database");
         }
-        return new ArrayList<>(DBO.values());
+        List<String> ans = new ArrayList<>();
+        List<Order> order = new ArrayList<>(DBO.values());
+        for(Order ord : order)
+        {
+            ans.add(ord.toString());
+        }
+        return ans;
     }
 
     public Integer getCountOfUnassignedOrders() {
