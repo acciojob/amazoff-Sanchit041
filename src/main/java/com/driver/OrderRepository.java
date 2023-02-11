@@ -14,6 +14,10 @@ public class OrderRepository {
     HashMap<String, List<String>> Pair_OD = new HashMap<>();
 
     public String addOrder(Order order) {
+        if(DBO.containsKey(order.getId()))
+        {
+            return "";
+        }
         DBO.put(order.getId(), order);
         return "Success";
     }
@@ -59,30 +63,30 @@ public class OrderRepository {
     }
 
     public Order getOrderById(String orderId)  {
-//        if (!DBO.containsKey(orderId)) {
-//            throw new Exception("Sorry Related OrderID is not present in Database enter  a valid order id ");
-//        }
+        if (!DBO.containsKey(orderId)) {
+          return null;
+        }
         return DBO.get(orderId);
     }
 
     public DeliveryPartner getPartnerById(String partnerId) {
-//        if (!DBD.containsKey(partnerId)) {
-//            throw new Exception("Enter Valid partner Details");
-//        }
+        if (!DBD.containsKey(partnerId)) {
+                 return null;
+         }
         return DBD.get(partnerId);
     }
 
 public Integer getOrderCountByPartnerId(String partnerId) {
-//        if (!Pair_OD.containsKey(partnerId)) {
-//            throw new Exception("partner is not present");
-//        }
+        if (!Pair_OD.containsKey(partnerId)) {
+            return 0;
+        }
         return Pair_OD.get(partnerId).size();
     }
 
     public List<String> getOrdersByPartnerId(String partnerId)  {
-//        if (!Pair_OD.containsKey(partnerId)) {
-//            throw new Exception("partner is not present");
-//        }
+        if (!Pair_OD.containsKey(partnerId)) {
+            return new ArrayList<>();
+        }
         List<Order> orderList = new ArrayList<>();
         List<String> OrderIdList = Pair_OD.get(partnerId);
         for (String orderId : OrderIdList) {
@@ -97,9 +101,9 @@ public Integer getOrderCountByPartnerId(String partnerId) {
     }
 
     public List<String> getAllOrders() {
-//        if (DBO.size() == 0) {
-//            throw new Exception("Their is no order present in database");
-//        }
+        if (DBO.size() == 0) {
+            return new ArrayList<>();
+        }
         List<String> ans = new ArrayList<>();
         List<Order> order = new ArrayList<>(DBO.values());
         for(Order ord : order)
@@ -118,10 +122,10 @@ public Integer getOrderCountByPartnerId(String partnerId) {
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId) {
-//       if(!Pair_OD.containsKey(partnerId))
-//       {
-//         throw  new Exception("PartnerId doesn't belong to anyorder");
-//       }
+       if(!Pair_OD.containsKey(partnerId))
+       {
+         return 0;
+       }
         List<String> ans = Pair_OD.get(partnerId);
         String HH = time.substring(0,2);
         String MM = time.substring(3);
@@ -138,6 +142,13 @@ public Integer getOrderCountByPartnerId(String partnerId) {
     }
 
     public String getLastDeliveryTimeByPartnerId(String PartnerId) {
+        if(!DBD.containsKey(PartnerId))
+        {
+            return "";
+        }
+        if(Pair_OD.containsKey(PartnerId)) {
+            return "";
+        }
         List<String> ans = Pair_OD.get(PartnerId);
         int max = 0;
         for(String orderId:ans)
@@ -151,15 +162,20 @@ public Integer getOrderCountByPartnerId(String partnerId) {
     }
 
     public String deletePartnerById(String PartnerId) {
+        if(!Pair_OD.containsKey(PartnerId))
+        {
+            return "";
+        }
         Pair_OD.put(PartnerId,new ArrayList<>());
         return "Success";
     }
 
     public String deleteOrderById(String OrderId) {
-//       if(!DBO.containsKey(OrderId))
-//       {
-//           throw  new Exception("Hey which order you want to delete here is not such type of order");
-//       }
+       if(!DBO.containsKey(OrderId))
+       {
+//
+           return "";
+       }
         DBO.remove(OrderId);
         return "Success";
     }
