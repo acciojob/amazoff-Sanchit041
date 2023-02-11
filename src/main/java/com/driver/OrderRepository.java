@@ -6,7 +6,7 @@ import java.beans.ExceptionListener;
 import java.security.PublicKey;
 import java.util.*;
 
-@Repository
+
 public class OrderRepository {
 
     HashMap<String, Order> DBO = new HashMap<>();
