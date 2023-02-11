@@ -17,28 +17,26 @@ public class OrderService {
       return orderRepository.addPartner(deliveryPartner);
     }
 
-    public String addOrderPartnerPair(String orderId, String PartnerId) throws Exception
-    {
+    public String addOrderPartnerPair(String orderId, String PartnerId) {
         return orderRepository.addOrderPartnerPair(orderId,PartnerId);
     }
 
-    public Order getOrderById(String orderId) throws Exception
-    {
+    public Order getOrderById(String orderId)     {
         return orderRepository.getOrderById(orderId);
     }
-    public DeliveryPartner getPartnerById(String partnerId) throws Exception
+    public DeliveryPartner getPartnerById(String partnerId)
     {
        return orderRepository.getPartnerById(partnerId);
     }
-    public Integer getOrderCountByPartnerId(String partnerId) throws Exception
+    public Integer getOrderCountByPartnerId(String partnerId)
     {
       return  orderRepository.getOrderCountByPartnerId(partnerId);
     }
-     public List<String> getOrdersByPartnerId(String partnerId) throws Exception
+     public List<String> getOrdersByPartnerId(String partnerId)
      {
          return orderRepository.getOrdersByPartnerId(partnerId);
      }
-     public List<String> getAllOrders() throws Exception
+     public List<String> getAllOrders()
      {
        return orderRepository.getAllOrders();
      }
@@ -46,7 +44,7 @@ public class OrderService {
       {
         return orderRepository.getCountOfUnassignedOrders();
       }
-      public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId)throws Exception
+      public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId)
       {
           return orderRepository.getOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
       }
@@ -58,7 +56,7 @@ public class OrderService {
       {
           return orderRepository.deletePartnerById(PartnerId);
       }
-       public String deleteOrderById(String OrderId)throws Exception
+       public String deleteOrderById(String OrderId)
        {
            return  orderRepository.deleteOrderById(OrderId);
        }

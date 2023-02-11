@@ -33,14 +33,14 @@ public class OrderController {
     }
 
     @PutMapping("/add-order-partner-pair")
-    public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId) throws Exception {
+    public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
          orderService.addOrderPartnerPair(orderId,partnerId);
         //This is basically assigning that order to that partnerId
         return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/get-order-by-id/{orderId}")
-    public ResponseEntity<Order> getOrderById(@PathVariable String orderId) throws Exception {
+    public ResponseEntity<Order> getOrderById(@PathVariable String orderId) {
 
         Order order= orderService.getOrderById(orderId);
         //order should be returned with an orderId.
@@ -49,7 +49,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-partner-by-id/{partnerId}")
-    public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId) throws Exception {
+    public ResponseEntity<DeliveryPartner> getPartnerById(@PathVariable String partnerId) {
 
         DeliveryPartner deliveryPartner = orderService.getPartnerById(partnerId);
 
@@ -59,7 +59,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-order-count-by-partner-id/{partnerId}")
-    public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId) throws Exception {
+    public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
 
         Integer orderCount = orderService.getOrderCountByPartnerId(partnerId);
 
@@ -69,7 +69,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-orders-by-partner-id/{partnerId}")
-    public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId) throws Exception {
+    public ResponseEntity<List<String>> getOrdersByPartnerId(@PathVariable String partnerId)  {
         List<String> orders = orderService.getOrdersByPartnerId(partnerId);
 
         //orders should contain a list of orders by PartnerId
@@ -78,7 +78,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-all-orders")
-    public ResponseEntity<List<String>> getAllOrders() throws Exception {
+    public ResponseEntity<List<String>> getAllOrders(){
         List<String> orders = orderService.getAllOrders();
 
         //Get all orders
@@ -95,7 +95,7 @@ public class OrderController {
     }
 
     @GetMapping("/get-count-of-orders-left-after-given-time/{partnerId}")
-    public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId) throws Exception {
+    public ResponseEntity<Integer> getOrdersLeftAfterGivenTimeByPartnerId(@PathVariable String time, @PathVariable String partnerId)  {
 
         Integer countOfOrders = orderService.getOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
 
@@ -123,7 +123,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/delete-order-by-id/{orderId}")
-    public ResponseEntity<String> deleteOrderById(@PathVariable String orderId) throws Exception {
+    public ResponseEntity<String> deleteOrderById(@PathVariable String orderId) {
 
          orderService.deleteOrderById(orderId);
         //Delete an order and also

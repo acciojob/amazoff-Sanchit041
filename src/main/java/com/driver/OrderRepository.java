@@ -24,7 +24,7 @@ public class OrderRepository {
         return "Success";
     }
 
-    public String addOrderPartnerPair(String orderId, String PartnerId) throws Exception {
+    public String addOrderPartnerPair(String orderId, String PartnerId) {
         boolean flag = false;
         for (String order : DBO.keySet()) {
             if (order.equals(orderId)) {
@@ -37,7 +37,7 @@ public class OrderRepository {
                 flag2 = true;
             }
         }
-        if (flag2 == false) throw new Exception("Partner is not Present Sorry");
+//        if (flag2 == false) throw new Exception("Partner is not Present Sorry");
         if (flag && flag2) {
             if(Pair_OD.containsKey(PartnerId))
             {
@@ -46,7 +46,7 @@ public class OrderRepository {
                 {
                     if(ans.get(i).equals(orderId))
                     {
-                        throw new Exception("Already Present");
+                       return "";
                     }
                 }
             }
@@ -54,34 +54,35 @@ public class OrderRepository {
             Pair_OD.get(PartnerId).add(orderId);
             return "Success";
         }
-        throw new Exception("Order is Not present");
+//        throw new Exception("Order is Not present");
+        return "";
     }
 
-    public Order getOrderById(String orderId) throws Exception {
-        if (!DBO.containsKey(orderId)) {
-            throw new Exception("Sorry Related OrderID is not present in Database enter  a valid order id ");
-        }
+    public Order getOrderById(String orderId)  {
+//        if (!DBO.containsKey(orderId)) {
+//            throw new Exception("Sorry Related OrderID is not present in Database enter  a valid order id ");
+//        }
         return DBO.get(orderId);
     }
 
-    public DeliveryPartner getPartnerById(String partnerId) throws Exception {
-        if (!DBD.containsKey(partnerId)) {
-            throw new Exception("Enter Valid partner Details");
-        }
+    public DeliveryPartner getPartnerById(String partnerId) {
+//        if (!DBD.containsKey(partnerId)) {
+//            throw new Exception("Enter Valid partner Details");
+//        }
         return DBD.get(partnerId);
     }
 
-    public Integer getOrderCountByPartnerId(String partnerId) throws Exception {
-        if (!Pair_OD.containsKey(partnerId)) {
-            throw new Exception("partner is not present");
-        }
+public Integer getOrderCountByPartnerId(String partnerId) {
+//        if (!Pair_OD.containsKey(partnerId)) {
+//            throw new Exception("partner is not present");
+//        }
         return Pair_OD.get(partnerId).size();
     }
 
-    public List<String> getOrdersByPartnerId(String partnerId) throws Exception {
-        if (!Pair_OD.containsKey(partnerId)) {
-            throw new Exception("partner is not present");
-        }
+    public List<String> getOrdersByPartnerId(String partnerId)  {
+//        if (!Pair_OD.containsKey(partnerId)) {
+//            throw new Exception("partner is not present");
+//        }
         List<Order> orderList = new ArrayList<>();
         List<String> OrderIdList = Pair_OD.get(partnerId);
         for (String orderId : OrderIdList) {
@@ -95,10 +96,10 @@ public class OrderRepository {
         return ans;
     }
 
-    public List<String> getAllOrders() throws Exception {
-        if (DBO.size() == 0) {
-            throw new Exception("Their is no order present in database");
-        }
+    public List<String> getAllOrders() {
+//        if (DBO.size() == 0) {
+//            throw new Exception("Their is no order present in database");
+//        }
         List<String> ans = new ArrayList<>();
         List<Order> order = new ArrayList<>(DBO.values());
         for(Order ord : order)
@@ -116,11 +117,11 @@ public class OrderRepository {
         return DBO.size() - ans.size();
     }
 
-    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId)throws Exception {
-       if(!Pair_OD.containsKey(partnerId))
-       {
-         throw  new Exception("PartnerId doesn't belong to anyorder");
-       }
+    public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time,String partnerId) {
+//       if(!Pair_OD.containsKey(partnerId))
+//       {
+//         throw  new Exception("PartnerId doesn't belong to anyorder");
+//       }
         List<String> ans = Pair_OD.get(partnerId);
         String HH = time.substring(0,2);
         String MM = time.substring(3);
@@ -154,11 +155,11 @@ public class OrderRepository {
         return "Success";
     }
 
-    public String deleteOrderById(String OrderId)throws Exception {
-       if(!DBO.containsKey(OrderId))
-       {
-           throw  new Exception("Hey which order you want to delete here is not such type of order");
-       }
+    public String deleteOrderById(String OrderId) {
+//       if(!DBO.containsKey(OrderId))
+//       {
+//           throw  new Exception("Hey which order you want to delete here is not such type of order");
+//       }
         DBO.remove(OrderId);
         return "Success";
     }
