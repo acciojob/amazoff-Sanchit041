@@ -37,6 +37,7 @@ public class OrderRepository {
             }
         }
         boolean flag2 = false;
+        if(DBD.size()==0) return"";
         for (String partner : DBD.keySet()) {
             if (partner.equals(PartnerId)) {
                 flag2 = true;
@@ -44,6 +45,7 @@ public class OrderRepository {
         }
 //        if (flag2 == false) throw new Exception("Partner is not Present Sorry");
         if (flag && flag2) {
+//            if(Pair_OD.size()==0)return "";
             if(Pair_OD.containsKey(PartnerId))
             {
                 for( String partnerId :Pair_OD.keySet() ) {
