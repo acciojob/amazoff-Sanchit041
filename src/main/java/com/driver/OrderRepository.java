@@ -45,12 +45,12 @@ public class OrderRepository {
         if (flag && flag2) {
             if(Pair_OD.containsKey(PartnerId))
             {
-                List<String> ans = Pair_OD.get(PartnerId);
-                for(int i=0;i<ans.size();i++)
-                {
-                    if(ans.get(i).equals(orderId))
-                    {
-                       return "";
+                for( String partnerId :Pair_OD.keySet() ) {
+                    List<String> ans = Pair_OD.get(partnerId);
+                    for (int i = 0; i < ans.size(); i++) {
+                        if (ans.get(i).equals(orderId)) {
+                            return "";
+                        }
                     }
                 }
             }
@@ -177,6 +177,14 @@ public Integer getOrderCountByPartnerId(String partnerId) {
            return "";
        }
         DBO.remove(OrderId);
+         for( String partnerId :Pair_OD.keySet() ) {
+                    List<String> ans = Pair_OD.get(partnerId);
+                    for (int i = 0; i < ans.size(); i++) {
+                        if (ans.get(i).equals(OrderId)) {
+                            ans.remove(OrderId);
+                        }
+                    }
+                }
         return "Success";
     }
 
