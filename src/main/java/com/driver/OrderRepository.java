@@ -30,6 +30,7 @@ public class OrderRepository {
 
     public String addOrderPartnerPair(String orderId, String PartnerId) {
         boolean flag = false;
+        if(DBO.size()==0) return "";
         for (String order : DBO.keySet()) {
             if (order.equals(orderId)) {
                 flag = true;
