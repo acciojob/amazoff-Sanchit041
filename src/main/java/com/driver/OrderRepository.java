@@ -90,7 +90,9 @@ public Integer getOrderCountByPartnerId(String partnerId) {
         List<Order> orderList = new ArrayList<>();
         List<String> OrderIdList = Pair_OD.get(partnerId);
         for (String orderId : OrderIdList) {
-            orderList.add(DBO.get(orderId));
+            if(DBO.containsKey(orderId)) {
+                orderList.add(DBO.get(orderId));
+            }
         }
         List<String> ans = new ArrayList<>();
         for(Order o : orderList)
@@ -116,7 +118,9 @@ public Integer getOrderCountByPartnerId(String partnerId) {
     public Integer getCountOfUnassignedOrders() {
         List<String> ans = new ArrayList<>();
         for (String partnerID : Pair_OD.keySet()) {
-            ans.addAll(Pair_OD.get(partnerID));
+            if(Pair_OD.containsKey(partnerID)) {
+                ans.addAll(Pair_OD.get(partnerID));
+            }
         }
         return DBO.size() - ans.size();
     }
@@ -133,7 +137,7 @@ public Integer getOrderCountByPartnerId(String partnerId) {
        int count=0;
        for(String orderID : ans)
        {
-           if(DBO.get(orderID).getDeliveryTime()>Time)
+           if(DBO.containsKey(orderID) && DBO.get(orderID).getDeliveryTime()>Time)
            {
                count++;
            }
